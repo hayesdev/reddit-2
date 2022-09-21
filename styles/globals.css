@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* determines layer to add custom properties */
+@layer components {
+  .icon {
+    @apply w-6 h-9 lg:w-9 cursor-pointer rounded-sm lg:p-1 lg:hover:bg-gray-100;
+  }
+} ;
