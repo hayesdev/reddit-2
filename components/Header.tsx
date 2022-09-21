@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
-import reddit from "../public/images/Reddit-Logo.wine.svg";
-import logo from "../public/images/icons/reddit-logo-14143.svg";
+import reddit from "../public/images/reddit.svg";
+import logo from "../public/images/reddit-logo.svg";
 import {
   ChevronDownIcon,
   HomeIcon,
