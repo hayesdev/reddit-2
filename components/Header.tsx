@@ -17,17 +17,18 @@ import {
   SparklesIcon,
   SpeakerphoneIcon,
 } from "@heroicons/react/outline";
-import { signIn } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 function Header() {
   //   const [isOpen, setIsOpen] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <div className="flex bg-white p-2 shadow-sm sticky top-0 z-50">
       <div className="relative w-20 h-10 flex-shrink-0 cursor-pointer">
         <Image src={reddit} layout="fill" />
       </div>
-      <div className="flex items-center mx-7 lg:min-w-[200px]">
+      <div className="flex items-center mx-7 lg:min-w-[120px]">
         <HomeIcon className="w-5 h-5" />
         {/* hidden on small screens, inline on large screens */}
         <p className="flex-1 ml-2 hidden lg:inline">Home</p>
@@ -57,20 +58,42 @@ function Header() {
         <SpeakerphoneIcon className="icon" />
 
         {/* Sign in/Sign out button */}
-        <div
-          onClick={() => signIn()}
-          className="hidden items-center space-x-2 border border-gray-100 p-2 cursor-pointer lg:flex lg:min-w-[90px]"
-        >
-          <div className="relative w-5 h-5 flex-shrink-0">
-            <Image
-              objectFit="contain"
-              src={logo}
-              layout="fill"
-              className="text-gray-400"
-            />
+        {session ? (
+          <div
+            onClick={() => signOut()}
+            className="hidden items-center space-x-2 border border-gray-100 p-2 cursor-pointer lg:flex lg:min-w-[90px]"
+          >
+            <div className="relative w-5 h-5 flex-shrink-0">
+              <Image
+                objectFit="contain"
+                src={logo}
+                layout="fill"
+                className="text-gray-400"
+                alt="reddit logo"
+              />
+            </div>
+            <p className="text-gray-400 text-sm">Sign Out</p>
           </div>
-          <p className="text-gray-400 text-sm">Sign In</p>
-        </div>
+        ) : (
+          <div
+            onClick={() => signIn()}
+            className="hidden items-center space-x-2 border border-gray-100 p-2 cursor-pointer lg:flex lg:min-w-[90px]"
+          >
+            <div className="relative w-5 h-5 flex-shrink-0">
+              <Image
+                objectFit="contain"
+                src={logo}
+                layout="fill"
+                className="text-gray-400"
+                alt="reddit logo"
+              />
+            </div>
+            <div className="flex-1 text-xs">
+              <p>{session}</p>
+              <p className="text-gray-400 text-sm">Sign In</p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* implement burger menu for small screens */}
