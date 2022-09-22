@@ -17,12 +17,13 @@ import {
   SparklesIcon,
   SpeakerphoneIcon,
 } from "@heroicons/react/outline";
+import { signIn } from "next-auth/react";
 
 function Header() {
   //   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex bg-white px-4 py-2 shadow-sm sticky top-0 z-50">
+    <div className="flex bg-white p-2 shadow-sm sticky top-0 z-50">
       <div className="relative w-20 h-10 flex-shrink-0 cursor-pointer">
         <Image src={reddit} layout="fill" />
       </div>
@@ -44,6 +45,7 @@ function Header() {
         {/* allows submit by 'Enter' */}
         <button type="submit" hidden />
       </form>
+
       <div className="text-gray-500 space-x-2 items-center mx-5 hidden lg:inline-flex">
         <SparklesIcon className="icon" />
         <GlobeIcon className="icon" />
@@ -53,8 +55,12 @@ function Header() {
         <BellIcon className="icon" />
         <PlusIcon className="icon" />
         <SpeakerphoneIcon className="icon" />
+
         {/* Sign in/Sign out button */}
-        <div className="hidden items-center space-x-2 border border-gray-100 p-2 cursor-pointer lg:flex lg:min-w-[90px]">
+        <div
+          onClick={() => signIn()}
+          className="hidden items-center space-x-2 border border-gray-100 p-2 cursor-pointer lg:flex lg:min-w-[90px]"
+        >
           <div className="relative w-5 h-5 flex-shrink-0">
             <Image
               objectFit="contain"
